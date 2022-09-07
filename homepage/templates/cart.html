@@ -7,6 +7,16 @@
 
 {%block start %}
 <div class="info-container">
+    {% if  not carts or not carts.get_cart_total %}
+    <div class="card">
+        No items in cart get back to shopping
+        <a href="{% url 'homepage' %}">
+
+            <button type="button">Homepage -></button>
+        </a>
+    </div>
+
+    {%else%}
     {% for cartitems in carts.cart_items.all %}
     <div class="card card-4-col">
         <div class="item-image">
@@ -39,9 +49,10 @@
         Grand Total : {{carts.get_cart_total}}
     </div>
     <a href="{% url 'order-confirmed' %}">
-
+        
         <button type="button" class="order-now">Order Now</button>
     </a>
 </div>
+{% endif %}
 
 {% endblock %}

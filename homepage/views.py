@@ -1,5 +1,4 @@
-from http.client import HTTPResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import login,authenticate,logout
 from homepage.models import *   
 from django.contrib import messages
@@ -81,10 +80,15 @@ def add_cart(request, item_uid):
 # view for my cart 
 @login_required(login_url='/login/')  
 def cart(request):
-    cart = Cart.objects.get(is_paid=False,user=request.user)
-    context = {
-        'carts': cart
-    }
+    try:
+        cart = Cart.objects.get(is_paid=False,user=request.user)
+        context = {
+            'carts': cart
+        }
+        print(f'Cart is {cart}, Items: {cart.cart_items.all}')
+    except Cart.DoesNotExist:
+        context = {'carts':None}
+
     return render(request,'cart.html',context=context)
 
 @login_required(login_url='/login/')  
@@ -97,7 +101,12 @@ def remove_cart_items(request,item_uid):
         return redirect('/cart/')
 
 def order_confirmed(request):
-    cart = Cart.objects.get(user=request.user,is_paid=False)
+    # to prevent access of order page
+    try:
+        cart = Cart.objects.get(user=request.user,is_paid=False)
+    except Cart.DoesNotExist:
+        return HttpResponse('not allowed')
+        
     cart.is_paid = True
     cart.save()
     return render(request,'order-placed.html',context={

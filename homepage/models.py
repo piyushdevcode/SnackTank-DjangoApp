@@ -15,7 +15,7 @@ class User(AbstractUser):
 class BaseModel(models.Model):
     uid = models.UUIDField(default=uuid.uuid4,editable=False,primary_key=True)
     created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
 
     class Meta:
         abstract = True
@@ -34,6 +34,7 @@ class FoodItems(BaseModel):
     item_name  = models.CharField(max_length=50)
     price = models.IntegerField()
     image = models.ImageField(upload_to='fooditems/')
+    stock = models.PositiveIntegerField(default=50)
 
     def __str__(self) -> str:
         return f'{self.item_name} | {self.category}'
@@ -55,9 +56,11 @@ class Cart(BaseModel):
 class CartItems(BaseModel):
     cart = models.ForeignKey(Cart,on_delete=models.CASCADE,related_name='cart_items')
     food_item = models.ForeignKey(FoodItems,on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
 
     def __str__(self) -> str:
-        return f'{self.cart.user.username} | {self.food_item}'
+        return f'{self.cart.user.username} | {self.food_item} | {self.quantity}'
 
 
     class Meta:
