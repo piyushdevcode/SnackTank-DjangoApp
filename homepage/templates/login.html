@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block extra_head %}
+<link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock %}
+
+{%block start%}
+<div class="signin-container">
+
+  <form class="signin" method="post" autocomplete="off">
+    {% csrf_token %}
+    <h1>Sign In</h1>
+    <h2>Create a new account? <a href="/register"><span>Signup</span></a></h2>
+    
+    <div class="signin__field">
+      <input class="signin__input" type="text" name="username" id="username" required />
+      <label class="signin__label" for="username">Username</label>
+    </div>
+    
+    <div class="signin__field">
+      <input class="signin__input" type="password" name="password" id="password" required />
+      <label class="signin__label" for="password">Password</label>
+    </div>
+    
+    <button>Sign in</button>
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    
+  </form>
+</div>
+  {% endblock %}

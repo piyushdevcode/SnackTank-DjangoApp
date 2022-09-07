@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static%}
+
+{%block extra_head %}
+<link rel="stylesheet" href="{% static 'mycart.css' %}">
+{% endblock %}
+
+{%block start %}
+<div class="info-container">
+    {% for cartitems in carts.cart_items.all %}
+    <div class="card card-4-col">
+        <div class="item-image">
+            <img src="/media/{{cartitems.food_item.image}}" alt="">
+        </div>
+        <div class="item-info">
+            <div class="item-name">{{cartitems.food_item.item_name}}</div>
+            <div class="item-category">Type: {{cartitems.food_item.category}}</div>
+        </div>
+        <div class="quantity-info">
+            <div class="qty-box">
+                <span>Quantity</span>
+                <p>+ 1 -</p>
+            </div>
+        </div>
+        <div class="other">
+            <div class="item-price"> Rs. {{cartitems.food_item.price}} /-</div>
+            <div class="delete-btn">
+                <a href="{% url 'remove-cart-item' cartitems.uid %}">
+ 
+                    <button type="button">delete  <i class="fa-solid fa-trash"></i></button>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="cart-total card">
+    <div class="grand-total">
+        Grand Total : {{carts.get_cart_total}}
+    </div>
+    <a href="{% url 'order-confirmed' %}">
+
+        <button type="button" class="order-now">Order Now</button>
+    </a>
+</div>
+
+{% endblock %}

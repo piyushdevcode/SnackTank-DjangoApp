@@ -1,0 +1,16 @@
+.myorder .card{
+    grid-template-columns: 1fr 1fr 2fr 1fr;
+    justify-items: initial;
+}
+
+.order-details span{
+    font-size: smaller;
+}
+
+.item-serialno{
+    margin-left: 1.5rem;
+}
+.myorderpage-title{
+    width: 100%;
+    text-align: center;
+}

@@ -1,0 +1,33 @@
+<!-- FIIIIIIIIIIIIIIIXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+{% extends "base.html" %}
+{% load static%}
+
+{%block extra_head %}
+<link rel="stylesheet" href="{% static 'mycart.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard.css' %}">
+{% endblock %}
+
+{%block start %}
+<div class="card myorderpage-title">
+        Your Previous Orders
+</div>
+{% for cart in carts %}
+<div class="info-container myorder">
+    <div class="card card-4-col">
+        <div class="item-serialno">
+            Sno: {{forloop.counter}}
+        </div>
+        <div class="order-date">
+            Date: {{cart.updated_at}}
+        </div>
+        <div class="order-details">
+            <div class="order-id">
+                Order-ID:  <span>{{cart.uid}}</span></div>
+        </div>
+        <div class="order-total">
+           Order Total : {{cart.get_cart_total}}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

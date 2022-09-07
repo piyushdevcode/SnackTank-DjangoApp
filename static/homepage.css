@@ -1,0 +1,72 @@
+.container {
+  box-shadow: 1px 1px 5px 1px #ba0b0b7d;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  position: relative;
+  transform: translateY(var(--shiftY,0px));
+  transition: ease-in-out 500ms;
+  /* display: flex; */
+}
+.img-box img {
+  max-height: 200px;
+  width: 65%;
+  max-width: 200px;
+}
+.basic-info-group {
+  font-weight: bold;
+  margin: 0.6rem 1.6rem;
+  display: flex;
+  font-size: large;
+  justify-content: space-between;
+}
+.btn-group {
+  padding: 0.2rem 1rem 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  flex: 1;
+}
+.btn-group button {
+  padding: 0.3rem 2.75rem;
+  width: 100%;
+  cursor: pointer;
+  white-space: nowrap;
+  margin: 0.4rem 0;
+  border-radius: 0.3rem;
+  border: 1px solid blueviolet;
+}
+.btn-group button:hover {
+  background-color: #4b111b;
+  color: white;
+  border: none;
+}
+
+.items-list-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin: 2em 4em;
+}
+
+.item-infoa {
+  box-shadow: inset -1px 1px 8px 2px #0f0f0f5c;
+  padding: 0.5rem;
+  border-radius: 0.65rem;
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+.item-info {
+  display: flex;
+}
+.item-title p {
+  font-family: "Satisfy", cursive;
+  letter-spacing: 0.2ch;
+  font-size: 3.5vh;
+}
+.container:hover{
+  --shiftY: 10px;
+  box-shadow: inset 0 -5px 0px 0px blueviolet;;
+}

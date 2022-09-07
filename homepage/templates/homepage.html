@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block extra_head%}
+<link rel="stylesheet" href="{% static 'homepage.css' %}">
+ {% endblock %}
+ 
+{% block start %}
+    <div class="items-list-container">
+      {% for item in items %}
+      <div class="container">
+        <div class="basic-info-group">
+          <div class="item-title">
+            <p>{{item.item_name| truncatechars:20}}</p>
+          </div>
+          <div class="item-price">
+            <p>Rs. {{item.price}}</p>
+          </div>
+          </div>
+          <div class="item-info">
+        <div class="img-box">
+          <img src="/media/{{item.image}}" alt="" />
+        </div>
+
+          <div class="btn-group">
+            <a href="{% url 'add-cart' item.uid %}">
+              
+              <button type="button" class="cart-btn">Add to Cart</button>
+            </a>
+            <a href="{% url 'buy-now' item.uid %}">
+              
+              <button type="button"  class="buy-btn">Buy Now</button>
+            </a>
+          </div>
+
+          
+      </div>
+      </div>
+      {% endfor %}
+    </div>
+{% endblock %}
